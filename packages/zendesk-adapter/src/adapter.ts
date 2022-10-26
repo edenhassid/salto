@@ -90,6 +90,8 @@ import hcSectionCategoryFilter from './filters/help_center_section_and_category'
 import hcTranslationFilter from './filters/help_center_translation'
 import fetchCategorySection from './filters/help_center_fetch_section_and_category'
 
+
+const { makeArray } = collections.array
 const log = logger(module)
 const { createPaginator } = clientUtils
 const { findDataField, computeGetArgs } = elementUtils
@@ -203,16 +205,22 @@ const zendeskGuideEntriesFunc = (
         typesConfig,
       })).flat()
       // Defining Zendesk Guide element to its corresponding help center (= subdomain)
-      brandPaginatorResponseValues.forEach(response => {
+      const x =  brandPaginatorResponseValues.map(response => {
         const responseEntryName = typesConfig[typeName].transformation?.dataField
         if (responseEntryName === undefined) {
-          return undefined
+          return makeArray(response)
         }
-        return (response[responseEntryName] as Value[]).forEach(instanceType => {
-          instanceType.brand = brandInstance.value.id
+        const responseEntries = makeArray(
+          (responseEntryName === configUtils.DATA_FIELD_ENTIRE_OBJECT)
+            ? response[responseEntryName]
+            : response
+        ) as clientUtils.ResponseValue[]
+        responseEntries.forEach(entry => {
+          entry.brand = brandInstance.value.id
         })
+        return responseEntries
       })
-      return brandPaginatorResponseValues
+      return x
     }).toArray()).flat()
   }
 

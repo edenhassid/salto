@@ -1,0 +1,27 @@
+2022-10-26T08:21:43.371Z info cli/index CLI started. Version: version 0.3.23, branch SALTO-2589_one_translation_per_local_per_article_section_category, hash efd0f047, Node exec location: /Users/edenhassid/.nvm/versions/node/v14.15.0/bin/node, Salto exec location: /usr/local/bin/salto, Current dir: /Users/edenhassid/projects/salto/packages/zendesk-adapter
+2022-10-26T08:21:43.372Z debug cli/index OS properties - platform: darwin, release: 21.2.0, arch x64
+2022-10-26T08:21:43.372Z debug cli/index Installation ID: 73d810ad-59d7-4533-827b-909c83557a67
+2022-10-26T08:21:43.373Z info cli/index running "salto fetch"
+2022-10-26T08:21:43.383Z debug cli/command_builder Running command fetch in path . with arguments {
+  config: undefined,
+  force: false,
+  stateOnly: false,
+  accounts: undefined,
+  env: undefined,
+  mode: 'default',
+  regenerateSaltoIds: false,
+  fromWorkspace: undefined,
+  fromEnv: undefined,
+  fromState: false,
+  verbose: false
+}
+2022-10-26T08:21:43.421Z error cli/cli Caught exception: Error: not a salto workspace (or any of the parent directories)
+Error: not a salto workspace (or any of the parent directories)
+    at loadLocalWorkspaceImpl (/Users/edenhassid/projects/salto/packages/core/src/local-workspace/workspace.ts:262:11)
+    at workspaceAction (/Users/edenhassid/projects/salto/packages/cli/src/command_builder.ts:222:23)
+    at commanderAction (/Users/edenhassid/projects/salto/packages/cli/src/command_builder.ts:193:26)
+    at Command.<anonymous> (/Users/edenhassid/projects/salto/packages/cli/src/command_register.ts:121:7)
+    at async Promise.all (index 0)
+    at Object.exports.default (/Users/edenhassid/projects/salto/packages/cli/src/cli.ts:52:5)
+    at main (/Users/edenhassid/projects/salto/packages/cli/src/index.ts:57:17)
+2022-10-26T08:21:43.424Z info cli/cli ran "fetch" in 51 ms
