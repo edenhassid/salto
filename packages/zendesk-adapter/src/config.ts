@@ -1659,7 +1659,7 @@ export const DEFAULT_TYPES: ZendeskApiConfig['types'] = {
         { fieldName: 'name' },
         { fieldName: 'html_url', fieldType: 'string' },
       ),
-      serviceUrl: '/knowledge/articles/{id}',
+      serviceUrl: '/knowledge/articles/{id}/{source_locale.value.value.id}?brand_id={brand.value.value.id}',
     },
     deployRequests: {
       add: {
@@ -1823,7 +1823,7 @@ export const DEFAULT_TYPES: ZendeskApiConfig['types'] = {
       fieldsToOmit: FIELDS_TO_OMIT.concat(
         { fieldName: 'html_url', fieldType: 'string' },
       ),
-      serviceUrl: '/knowledge/arrange/sections/{id}',
+      serviceUrl: '/knowledge/arrange/sections/{id}?brand_id={brand.value.value.id}',
     },
     deployRequests: {
       add: {
@@ -1935,7 +1935,7 @@ export const DEFAULT_TYPES: ZendeskApiConfig['types'] = {
       fieldsToOmit: FIELDS_TO_OMIT.concat(
         { fieldName: 'html_url', fieldType: 'string' },
       ),
-      serviceUrl: '/knowledge/arrange/categories/{id}',
+      serviceUrl: '/knowledge/arrange/categories/{id}?brand_id={brand.value.value.id}',
     },
     deployRequests: {
       add: {

@@ -14,7 +14,14 @@
 * limitations under the License.
 */
 import _ from 'lodash'
-import { Element, Values, isInstanceElement, isPrimitiveValue, InstanceElement } from '@salto-io/adapter-api'
+import {
+  Element,
+  Values,
+  isInstanceElement,
+  isPrimitiveValue,
+  InstanceElement,
+  isReferenceExpression
+} from '@salto-io/adapter-api'
 import { resolvePath, safeJsonStringify } from '@salto-io/adapter-utils'
 import { logger } from '@salto-io/logging'
 import { ClientGetWithPaginationParams } from '../client'
@@ -94,7 +101,13 @@ export const replaceUrlParams = (url: string, paramValues: Record<string, unknow
   url.replace(
     ARG_PLACEHOLDER_MATCHER,
     val => {
-      const replacement = paramValues[val.slice(1, -1)] ?? val
+      let replacement
+      if (val.includes('.')
+        && isReferenceExpression(paramValues[val.substr(1, (val.indexOf('.') - 1))])) {
+        replacement = _.get(paramValues, val.slice(1, -1)) ?? val
+      } else {
+        replacement = paramValues[val.slice(1, -1)] ?? val
+      }
       if (!isPrimitiveValue(replacement)) {
         throw new Error(`Cannot replace param ${val} in ${url} with non-primitive value ${replacement}`)
       }

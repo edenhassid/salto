@@ -20,7 +20,7 @@ import { collections } from '@salto-io/lowerdash'
 
 const { findDuplicates } = collections.array
 
-export const ARG_PLACEHOLDER_MATCHER = /\{([\w_]+)\}/g
+export const ARG_PLACEHOLDER_MATCHER = /\{([\w_.]+)\}/g
 
 export type DependsOnConfig = {
   pathParam: string
